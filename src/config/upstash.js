@@ -5,7 +5,7 @@ import "dotenv/config"
 
 const ratelimit = new Ratelimit({
     redis: Redis.fromEnv(),
-    limiter: Ratelimit.slidingWindow(15, "60 s"),
+    limiter: Ratelimit.slidingWindow(70, "60 s"),
 })
 
 export default ratelimit
