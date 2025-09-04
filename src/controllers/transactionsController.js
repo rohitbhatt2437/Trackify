@@ -39,19 +39,19 @@ export async function createTransaction(req, res){
 export async function deleteTransaction(req, res){
         try {
             const {id} = req.params;
-            const parsedId = parseInt(id);
+            
     
-            if(isNaN(parsedId)){
+            if(isNaN(parseInt(id))){
                 return res.status(400).json({message: "Invalid transaction ID."})
             }
     
             const result = await sql`
-                DELETE FROM transactions WHERE id = ${parsedId} RETURNING *
+                DELETE FROM transactions WHERE id = ${id} RETURNING *
             `
-            if(result.length===0 || typeof id!==Number){
+            if(result.length===0 ){
                 return res.status(404).json({message:"Transaction not found"})
             }
-            return res.status(200).json({message: "Transaction deleted succesfully"});
+            return res.status(200).json({message: "Transaction deleted succrsfully"});
     
         } catch (error) {
             console.log("Error deleting the transaction", error)
